@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aes-app-config
+  namespace: azure-iot-operations
+data:
+   broker_host: "aio-broker.azure-iot-operations.svc.cluster.local"
+   broker_port: "18885"
+   cert_path: "/var/run/certs/ca.crt"
+   db_host: "my-redis.redis.svc.cluster.local"
+   db_port: "6379"

@@ -1,0 +1,7 @@
+# Important: do not use in production environments
+# Create a service account
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: aes-sample-iot-device
+  namespace: azure-iot-operations
