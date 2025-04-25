@@ -1,0 +1,15 @@
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number'
+        required: true
+        type: string
+
+jobs:
+  print-tag:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.print_tags }} 
+    steps:
+      - name: Print the image version
+        run: echo  The version is ${{ inputs.version }} 
