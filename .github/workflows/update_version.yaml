@@ -9,7 +9,7 @@ on:
 jobs:
   print-tag:
     runs-on: ubuntu-latest
-    if: ${{ inputs.print_tags }} 
+    if: ${{ inputs.version }} 
     steps:
       - name: Print the image version
         run: echo  The version is ${{ inputs.version }} 
