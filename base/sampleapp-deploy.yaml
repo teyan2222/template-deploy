@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aes-sample-app
+  namespace: azure-iot-operations
+  labels:
+    app: aes-sample-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aes-sample-app
+  template:
+    metadata:
+      labels:
+        app: aes-sample-app
+    spec:
+      serviceAccountName: aes-sample-app
+      containers:
+      - image: {image_reg}/sample_portal:{image_tag}
+        imagePullPolicy: Always
+        name: aes-sample-app
+        envFrom:
+          - configMapRef: {name: aes-app-config}
+        command: ["python3"]
+        args: ["sampleapp.py", "--configmap"]
+        resources:
+          limits:
+            cpu: 500m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        volumeMounts:
+        - name: trust-bundle
+          mountPath: /var/run/certs
+      volumes:
+      - name: trust-bundle
+        configMap:
+          name: azure-iot-operations-aio-ca-trust-bundle # Default root CA cert

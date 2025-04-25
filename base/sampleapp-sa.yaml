@@ -1,0 +1,6 @@
+# Important: do not use in production environments
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: aes-sample-app
+  namespace: azure-iot-operations

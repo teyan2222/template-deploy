@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aes-sample-iot-device
+  namespace: azure-iot-operations
+  labels:
+    app: aes-sample-iot-device
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aes-sample-iot-device
+  template:
+    metadata:
+      labels:
+        app: aes-sample-iot-device
+    spec:
+      serviceAccountName: aes-sample-iot-device
+      containers:
+      - image: {image_reg}/sample_portal:{image_tag}
+        imagePullPolicy: Always
+        name: aes-sample-iot-device
+        command: ["python3"]
+        args: ["sampledev.py", "-s", "aio-broker", "-p", "18885", "-c", "/var/run/certs/ca.crt"]
+        resources:
+          limits:
+            cpu: 500m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        volumeMounts:
+        - name: trust-bundle
+          mountPath: /var/run/certs
+      volumes:
+      - name: trust-bundle
+        configMap:
+          name: azure-iot-operations-aio-ca-trust-bundle # Default root CA cert
+

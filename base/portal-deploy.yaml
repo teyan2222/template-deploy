@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aes-sample-portal
+  namespace: default
+  labels:
+    app: aes-portal-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aes-portal-deployment
+  template:
+    metadata:
+      labels:
+        app: aes-portal-deployment
+    spec:
+      serviceAccountName: aes-sample-portal
+      containers:
+      - image: {image_reg}/sample_portal:{image_tag}
+        imagePullPolicy: Always
+        name: aes-sample-portal
+        envFrom:
+          - configMapRef: {name: aes-portal-config}
+        command: ["flask"]
+        args: ["--app", "portal_app", "run", "--host", "0.0.0.0"]
+        resources:
+          limits:
+            cpu: 500m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
