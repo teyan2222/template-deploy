@@ -17,7 +17,7 @@ spec:
     spec:
       serviceAccountName: aes-sample-portal
       containers:
-      - image: {image_reg}/sample_portal:{image_tag}
+      - image: {image_reg}/private/sample_app:{image_tag}
         imagePullPolicy: Always
         name: aes-sample-portal
         envFrom:

@@ -1,15 +1,30 @@
 on:
   workflow_dispatch:
     inputs:
-      version:
-        description: 'Version number'
+      registry:
+        description: 'Registry'
+        required: true
+        type: string
+      tag:
+        description: 'Tag'
         required: true
         type: string
 
 jobs:
-  print-tag:
+  update-img:
     runs-on: ubuntu-latest
-    if: ${{ inputs.version }} 
     steps:
       - name: Print the image version
-        run: echo  The version is ${{ inputs.version }} 
+        run: echo  The version is ${{ inputs.tag }}
+      - uses: actions/checkout@v4
+      - runs: | 
+          git config user.name "github-actions[bot]"
+          git config user.email "bot@users.noreply.github.com"
+          git branch action/${{ inputs.tag }}
+          git checkout action/${{ inputs.tag }}
+          ./scripts/build.sh -r ${{ inputs.registry }} -t ${{ inputs.tag }}
+          git add ./deploy/*
+          git commit -m "Update image ${{ inputs.tag }}"
+          git push --set-upstream origin action/${{ inputs.tag }}
+
+          
