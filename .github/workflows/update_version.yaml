@@ -18,10 +18,8 @@ jobs:
         run: echo  The version is ${{ inputs.tag }}
         
       - uses: actions/checkout@v4
-      
-      - name: Create PR
-        env:
-          GH_TOKEN: ${{ github.token }}
+
+      - name: Push to branch
         run: | 
           git config user.name "github-actions[bot]"
           git config user.email "bot@users.noreply.github.com"
@@ -31,6 +29,11 @@ jobs:
           git add ./deploy/*
           git commit -m "Update image ${{ inputs.tag }}"
           git push --set-upstream origin action/${{ inputs.tag }}
-          gh pr create --base action/${{ inputs.tag }} --head main --title "Update image ${{ inputs.tag }}" --body "This PR updates the image to version ${{ inputs.tag }}."
+
+      - name: Create PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: | 
+          gh pr create --base main --head action/${{ inputs.tag }} --title "Update image ${{ inputs.tag }}" --body "This PR updates the image to version ${{ inputs.tag }}."
 
           
