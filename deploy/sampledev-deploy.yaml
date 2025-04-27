@@ -17,7 +17,7 @@ spec:
     spec:
       serviceAccountName: aes-sample-iot-device
       containers:
-      - image: abcdzz1.azurecr.io/sample_dev:latest
+      - image: abcdzz1.azurecr.io/private/sample_app:main_14687615554
         imagePullPolicy: Always
         name: aes-sample-iot-device
         command: ["python3"]

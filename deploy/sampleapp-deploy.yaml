@@ -17,7 +17,7 @@ spec:
     spec:
       serviceAccountName: aes-sample-app
       containers:
-      - image: abcdzz1.azurecr.io/sample_app:latest
+      - image: abcdzz1.azurecr.io/private/sample_app:main_14687615554
         imagePullPolicy: Always
         name: aes-sample-app
         envFrom:
