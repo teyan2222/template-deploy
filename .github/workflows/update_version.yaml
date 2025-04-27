@@ -26,5 +26,6 @@ jobs:
           git add ./deploy/*
           git commit -m "Update image ${{ inputs.tag }}"
           git push --set-upstream origin action/${{ inputs.tag }}
+          gh pr create --base action/${{ inputs.tag }} --head main --title "Update image ${{ inputs.tag }}" --body "This PR updates the image to version ${{ inputs.tag }}."
 
           
