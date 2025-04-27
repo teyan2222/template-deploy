@@ -17,7 +17,7 @@ jobs:
       - name: Print the image version
         run: echo  The version is ${{ inputs.tag }}
       - uses: actions/checkout@v4
-      - runs: | 
+      - run: | 
           git config user.name "github-actions[bot]"
           git config user.email "bot@users.noreply.github.com"
           git branch action/${{ inputs.tag }}
