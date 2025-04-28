@@ -24,10 +24,3 @@ spec:
           - configMapRef: {name: aes-portal-config}
         command: ["flask"]
         args: ["--app", "boiler_portal", "run", "--host", "0.0.0.0"]
-        resources:
-          limits:
-            cpu: 500m
-            memory: 200Mi
-          requests:
-            cpu: 100m
-            memory: 100Mi
