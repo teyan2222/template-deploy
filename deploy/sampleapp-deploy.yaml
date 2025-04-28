@@ -17,13 +17,13 @@ spec:
     spec:
       serviceAccountName: aes-sample-app
       containers:
-      - image: abcdzz1.azurecr.io/sample_app:latest
+      - image: abcdzz1.azurecr.io/private/sample_app:main_14700013648
         imagePullPolicy: Always
         name: aes-sample-app
         envFrom:
           - configMapRef: {name: aes-app-config}
         command: ["python3"]
-        args: ["sampleapp.py", "--configmap"]
+        args: ["-m", "boiler_monitor", "--configmap"]
         resources:
           limits:
             cpu: 500m
