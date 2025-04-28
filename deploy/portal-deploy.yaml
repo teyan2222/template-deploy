@@ -17,13 +17,13 @@ spec:
     spec:
       serviceAccountName: aes-sample-portal
       containers:
-      - image: abcdzz1.azurecr.io/sample_portal:latest
+      - image: abcdzz1.azurecr.io/private/sample_app:main_14699034402
         imagePullPolicy: Always
         name: aes-sample-portal
         envFrom:
           - configMapRef: {name: aes-portal-config}
         command: ["flask"]
-        args: ["--app", "portal_app", "run", "--host", "0.0.0.0"]
+        args: ["--app", "boiler_portal", "run", "--host", "0.0.0.0"]
         resources:
           limits:
             cpu: 500m
