@@ -22,13 +22,6 @@ spec:
         name: aes-sample-iot-device
         command: ["python3"]
         args: ["-m", "boiler_simulator", "-s", "aio-broker", "-p", "18885", "-c", "/var/run/certs/ca.crt"]
-        resources:
-          limits:
-            cpu: 500m
-            memory: 200Mi
-          requests:
-            cpu: 100m
-            memory: 100Mi
         volumeMounts:
         - name: trust-bundle
           mountPath: /var/run/certs
