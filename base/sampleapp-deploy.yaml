@@ -24,13 +24,6 @@ spec:
           - configMapRef: {name: aes-app-config}
         command: ["python3"]
         args: ["-m", "boiler_monitor", "--configmap"]
-        resources:
-          limits:
-            cpu: 500m
-            memory: 200Mi
-          requests:
-            cpu: 100m
-            memory: 100Mi
         volumeMounts:
         - name: trust-bundle
           mountPath: /var/run/certs
