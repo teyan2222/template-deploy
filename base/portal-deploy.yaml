@@ -23,7 +23,7 @@ spec:
         envFrom:
           - configMapRef: {name: aes-portal-config}
         command: ["flask"]
-        args: ["--app", "portal_app", "run", "--host", "0.0.0.0"]
+        args: ["--app", "boiler_portal", "run", "--host", "0.0.0.0"]
         resources:
           limits:
             cpu: 500m

@@ -23,7 +23,7 @@ spec:
         envFrom:
           - configMapRef: {name: aes-app-config}
         command: ["python3"]
-        args: ["sampleapp.py", "--configmap"]
+        args: ["-m", "boiler_monitor", "--configmap"]
         resources:
           limits:
             cpu: 500m

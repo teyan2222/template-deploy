@@ -21,7 +21,7 @@ spec:
         imagePullPolicy: Always
         name: aes-sample-iot-device
         command: ["python3"]
-        args: ["sampledev.py", "-s", "aio-broker", "-p", "18885", "-c", "/var/run/certs/ca.crt"]
+        args: ["-m", "boiler_simulator", "-s", "aio-broker", "-p", "18885", "-c", "/var/run/certs/ca.crt"]
         resources:
           limits:
             cpu: 500m
