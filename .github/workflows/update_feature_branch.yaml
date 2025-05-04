@@ -1,8 +1,12 @@
-name: Send out PR to update image version on main branch
+name: Update image version on main branch
 
 on:
   workflow_dispatch:
     inputs:
+      branch:
+        description: 'Branch'
+        required: true
+        type: string
       registry:
         description: 'Registry'
         required: true
@@ -25,17 +29,9 @@ jobs:
         run: | 
           git config user.name "github-actions[bot]"
           git config user.email "bot@users.noreply.github.com"
-          git branch action/${{ inputs.tag }}
-          git checkout action/${{ inputs.tag }}
+          git branch ${{ inputs.branch }}
+          git checkout ${{ inputs.branch }}
           ./scripts/build.sh -r ${{ inputs.registry }} -t ${{ inputs.tag }}
           git add ./deploy/*
           git commit -m "Update image ${{ inputs.tag }}"
-          git push --set-upstream origin action/${{ inputs.tag }}
-
-      - name: Create PR
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: | 
-          gh pr create --base main --head action/${{ inputs.tag }} --title "Update image ${{ inputs.tag }}" --body "This PR updates the image to version ${{ inputs.tag }}."
-
-          
+          git push --set-upstream origin ${{ inputs.branch }}
