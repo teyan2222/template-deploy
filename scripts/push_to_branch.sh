@@ -15,6 +15,7 @@ if [ $new_branch ]; then
   git branch $branch_name
 fi
 git checkout $branch_name
+git pull
 ./scripts/build.sh -r $registry -t $tag
 git add ./deploy/*
 git commit -m "Update image $tag"
