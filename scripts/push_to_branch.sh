@@ -6,16 +6,15 @@ registry=$1
 branch_name=$2
 tag=$3
 new_branch=0
-git rev-parse --verify origin/$branch_name
+git checkout $branch_name
 if [ $? ]; then 
   new_branch=1 
 fi
 echo $registry $branch_name $tag 
 if [ $new_branch ]; then 
   git branch $branch_name
+  git checkout $branch_name
 fi
-git checkout $branch_name
-git pull
 ./scripts/build.sh -r $registry -t $tag
 git add ./deploy/*
 git commit -m "Update image $tag"
